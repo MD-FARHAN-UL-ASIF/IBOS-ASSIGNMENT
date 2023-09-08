@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,16 @@ namespace DAL.EF.Models
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
 
+        [Required]
         public DateTime AttendenceDate { get; set; }
 
+        [Required]
         public int IsPresent { get; set; }
 
+        [Required]
         public int IsAbsent { get; set; }
 
+        [Required]
         public int IsOffday { get; set; }
 
  //       public virtual Emp Emp { get; set; }
