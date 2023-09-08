@@ -12,7 +12,7 @@ namespace BLL.DTOs
 
         public int EmployeeId { get; set; }
 
-        public DateOnly AttendenceDate { get; set; }
+        public DateTime AttendenceDate { get; set; }
 
         public int IsPresent { get; set; }
 
@@ -20,6 +20,6 @@ namespace BLL.DTOs
 
         public int IsOffday { get; set; }
 
-        public DAL.EF.Models.Emp Emp { get; set; }
+  //      public DAL.EF.Models.Emp Emp { get; set; }
     }
 }

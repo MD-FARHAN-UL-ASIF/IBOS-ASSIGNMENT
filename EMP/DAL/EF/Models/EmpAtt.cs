@@ -14,7 +14,7 @@ namespace DAL.EF.Models
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
 
-        public DateOnly AttendenceDate { get; set; }
+        public DateTime AttendenceDate { get; set; }
 
         public int IsPresent { get; set; }
 
@@ -22,6 +22,6 @@ namespace DAL.EF.Models
 
         public int IsOffday { get; set; }
 
-        public virtual Emp Emp { get; set; }
+ //       public virtual Emp Emp { get; set; }
     }
 }

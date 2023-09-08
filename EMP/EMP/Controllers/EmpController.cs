@@ -9,7 +9,7 @@ namespace EMP.Controllers
 
     public class EmpController : Controller
     {
-        [HttpGet]
+        [HttpGet("employee_list")]
         public IActionResult Get()
         {
             var data = EmpService.Get();
@@ -19,11 +19,11 @@ namespace EMP.Controllers
             }
             else
             {
-                return NotFound("Employee not found");
+                return NotFound("where are you?");
             }
         }
 
-        [HttpPost]
+        [HttpPost("add_employee")]
         public IActionResult Create(EmpDTO employeeDTO)
         {
             var data = EmpService.Create(employeeDTO);
@@ -33,11 +33,11 @@ namespace EMP.Controllers
             }
             else
             {
-                return BadRequest("Please try again");
+                return BadRequest("ops...! try again");
             }
         }
 
-        [HttpPut]
+        [HttpPut("update_employee/{id}")]
         public IActionResult Update(int id, EmpDTO employeeDTO)
         {
             employeeDTO.EmployeeId = id;
@@ -50,9 +50,50 @@ namespace EMP.Controllers
             }
             else
             {
-                return BadRequest("Please try again ☹");
+                return BadRequest("will you try again ☹..?");
             }
         }
 
+        [HttpGet("third_highest_salary")]
+        public IActionResult ThirdHighestSal()
+        {
+            var data = EmpService.Get3rd();
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            else
+            {
+                return NotFound("ops...we cant find!");
+            }
+        }
+
+        [HttpGet("Abcent")]
+        public IActionResult GetOnAbcent()
+        {
+            var data = EmpService.GetOnAbsent();
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            else
+            {
+                return NotFound("Record Not Found!");
+            }
+        }
+
+        [HttpGet("employee_supervisor/{id}")]
+        public IActionResult GetByHierarchy(int id)
+        {
+            var data = EmpService.GetEmployeeHierarchy(id);
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            else
+            {
+                return NotFound("we cant find you!");
+            }
+        }
     }
 }
