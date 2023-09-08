@@ -12,17 +12,18 @@ namespace DAL.REPO
     {
         public bool Create(EmpAtt obj)
         {
-            throw new NotImplementedException();
+            db.EmpAtts.Add(obj);
+            return db.SaveChanges() > 0;
         }
 
         public List<EmpAtt> Get()
         {
-            throw new NotImplementedException();
+            return db.EmpAtts.ToList();
         }
 
         public EmpAtt Get(int id)
         {
-            throw new NotImplementedException();
+            return db.EmpAtts.Find(id);
         }
 
         public EmpAtt Get3rd()
