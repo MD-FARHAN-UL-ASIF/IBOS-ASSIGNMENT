@@ -68,7 +68,7 @@ namespace EMP.Controllers
             }
         }
 
-        [HttpGet("Abcent")]
+        [HttpGet("Max_to_Min")]
         public IActionResult GetOnAbcent()
         {
             var data = EmpService.GetOnAbsent();

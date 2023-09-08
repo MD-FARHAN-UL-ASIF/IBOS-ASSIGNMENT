@@ -13,23 +13,21 @@ namespace BLL.Services
         public List<MonthlyAttDTO> GetMonthlyReport()
         {
             var reports = new List<MonthlyAttDTO>();
+            var currentDate = DateTime.Now;
 
-            
             var employees = DataAccessFactory.EmpData().Get();
 
             foreach (var employee in employees)
             {
-               
                 var attendanceRecords = DataAccessFactory.AttData().Get()
-                    .Where(a => a.EmployeeId == employee.EmployeeId && a.AttendenceDate.Month == DateTime.Now.Month)
+                    .Where(a => a.EmployeeId == employee.EmployeeId && a.AttendenceDate.Month == currentDate.Month)
                     .ToList();
 
-                // Calculate the report data
                 var report = new MonthlyAttDTO
                 {
                     EmployeeName = employee.EmployeeName,
-                    Month = DateTime.Now.ToString("MMMM"), // Replace with the actual month name
-                    PayableSalary = employee.EmployeeSalary, // Replace with the actual logic for calculating payable salary
+                    Month = currentDate.ToString("MMMM"), 
+                    PayableSalary = employee.EmployeeSalary, 
                     TotalPresent = attendanceRecords.Count(a => a.IsPresent == 1),
                     TotalAbsent = attendanceRecords.Count(a => a.IsAbsent == 1),
                     TotalOffday = attendanceRecords.Count(a => a.IsOffday == 1),
@@ -41,4 +39,4 @@ namespace BLL.Services
             return reports;
         }
     }
-}
+ }

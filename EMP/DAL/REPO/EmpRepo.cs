@@ -63,25 +63,38 @@ namespace DAL.REPO
             return db.SaveChanges() > 0;
         }
 
-        List<string> iRepo<Emp, int, bool>.GetOnHierarchy(int id)
+        public List<string> GetOnHierarchy(int id)
         {
             var hierarchy = new List<string>();
+            var visitedIds = new HashSet<int>(); 
+
+
 
             while (id != 0)
             {
-                var emp = db.Emps.FirstOrDefault(e => e.EmployeeId == id);
-
-                if (emp == null)
+                if (visitedIds.Contains(id))
                 {
-                    // Employee not found
-                    return null;
+                    break;
                 }
 
-                hierarchy.Add(emp.EmployeeName);
-                id = emp.SupervisorId;
+
+
+                var employee = db.Emps.FirstOrDefault(e => e.EmployeeId == id);
+
+
+
+                if (employee == null)
+                {
+                    throw new Exception("Employee not found");
+                }
+
+
+
+                hierarchy.Add(employee.EmployeeName);
+                visitedIds.Add(id); 
+                id = employee.SupervisorId;
             }
 
-            hierarchy.Reverse(); // Reverse the hierarchy to get the correct order
             return hierarchy;
         }
     }
